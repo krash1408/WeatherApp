@@ -1,10 +1,12 @@
+import Component from '../../framework/Component';
 import {Temperature} from '../Temperature'
-export default class App {
+export default class App extends Component {
   constructor (host) {
-    host.innerHTML = '';
-    
+    super(host);
+  }
+  render() {   
     const temperature = document.createElement('div');
     new Temperature(temperature);
-    host.append(temperature);
+    this.host.append(temperature);
   }
 }

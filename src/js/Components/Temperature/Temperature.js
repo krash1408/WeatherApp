@@ -1,6 +1,9 @@
-export default class Temperature {
+import Component from '../../framework/Component'
+export default class Temperature extends Component {
   constructor (host) {
-    host.innerHTML = '';
-    host.innerHTML = 'Temperature!';
+    super(host);
+  }
+  render() {
+    return '7&deg';
   }
 }
