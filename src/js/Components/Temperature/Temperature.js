@@ -4,6 +4,6 @@ export default class Temperature extends Component {
     super(host);
   }
   render() {
-    return '7&deg';
+    return '7&deg;C';
   }
 }

@@ -5,9 +5,26 @@ export default class Component {
   }
   _render() {
     this.host.innerHTML = '';
-    this.host.innerHTML = this.render();
+
+    const content = this.render();
+    if (typeof content === 'string') {
+      this.host.innerHTML = content;
+    } else {
+      content.map(item => {
+        if (typeof item === 'string') {
+          const domElement = document.createElement('div');
+          domElement.innerHTML = item;
+          return domElement;
+        } else {
+          return item;
+        }
+      }) // [string|HTMLelement] => [HTMLelement]
+        .forEach(domElement => {
+          this.host.appendChild(domElement);
+        })
+      }
   }
-  // @return {string|array|object}
+  // @return {string|[string|HTMLelement]}
   render() {
 
   }
