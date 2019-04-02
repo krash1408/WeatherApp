@@ -1,0 +1,33 @@
+html {
+  font-size: 10px;
+}
+body {
+  font-size: 1.4rem;
+}
+div {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-width: .2rem;
+  border-style: solid;
+}
+div {
+  border-color: Red;
+}
+div div div {
+  border-color: Orange;
+}
+div div div div {
+  border-color: yellow;
+}
+div div div div div {
+  border-color: Green;
+}
+div div div div div div {
+  border-color: lightblue;
+}
+div div div div div div div {
+  border-color: blue;
+}
+div div div div div div div div {
+  border-color: brown;
+}
