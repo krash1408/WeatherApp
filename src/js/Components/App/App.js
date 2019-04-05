@@ -11,6 +11,23 @@ export default class App extends Component {
     const w1 = document.createElement('div');
     new Wind(w1, {speed: 20, unit: 'km/h'});
 
-    return ['temperature:', t1, w1];
+    return ['temperature:', 
+    {
+      tag: Temperature,
+      props: {
+        temp: 12,
+        unit: 'C',
+      },
+    },
+    {
+      tag: Wind,
+      props: {
+        speed: 140,
+        unit: 'M/h',
+      },
+    },
+    t1,
+    w1,
+  ];
   }
 }

@@ -6,26 +6,32 @@ export default class Component {
   }
   _render() {
     this.host.innerHTML = '';
-
     let content = this.render();
+
     if (typeof content === 'string') {
-      content = [content];
+      this.host.innerHTML = content;
+    } else {
+      content.map(item => {
+        if (typeof item === 'string') {
+          const htmlElement = document.createElement('div');
+          htmlElement.innerHTML = item;
+          return htmlElement;
+        } else {
+          if (typeof item.tag === 'function') {
+            const container = document.createElement('div');
+            new item.tag(container, item.props);
+            return container;
+          }
+          return item;
+        }
+      }) // [string|HTMLelement] => [HTMLelement]
+        .forEach(domElement => {
+          this.host.appendChild(domElement);
+        })
     }
-    content.map(item => {
-      if (typeof item === 'string') {
-        const domElement = document.createElement('div');
-        domElement.innerHTML = item;
-        return domElement;
-      } else {
-        return item;
-      }
-    }) // [string|HTMLelement] => [HTMLelement]
-      .forEach(domElement => {
-        this.host.appendChild(domElement);
-      })
   }
   // @return {string|[string|HTMLelement]}
   render() {
-
+    
   }
 }

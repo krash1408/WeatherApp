@@ -13,21 +13,21 @@ div {
 div {
   border-color: Red;
 }
-div div div {
+div div {
   border-color: Orange;
 }
-div div div div {
-  border-color: yellow;
+div div div {
+  border-color: Yellow;
 }
-div div div div div {
+div div div div {
   border-color: Green;
 }
+div div div div div {
+  border-color: Lightblue;
+}
 div div div div div div {
-  border-color: lightblue;
+  border-color: Blue;
 }
 div div div div div div div {
-  border-color: blue;
-}
-div div div div div div div div {
-  border-color: brown;
+  border-color: Brown;
 }
