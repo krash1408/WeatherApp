@@ -7,14 +7,10 @@ export default class Component {
   _render() {
     this.host.innerHTML = '';
     let content = this.render();
-    if (typeof content === 'string') {
-      this.host.innerHTML = content;
-    } else {
-      content.map(item => this._vDomElementToHtmlElement(item)) // [string|HTMLelement] => [HTMLelement]
-        .forEach(domElement => {
-          this.host.appendChild(domElement);
-        })
-    }
+    typeof content !== 'string' ? content.map(item => this._vDomElementToHtmlElement(item))
+      .forEach(domElement => {
+        this.host.appendChild(domElement)
+      }) : this.host.innerHTML = content;
   }
   // virtual dom
   
@@ -24,7 +20,6 @@ export default class Component {
   }
 
   _vDomElementToHtmlElement(element) {
-    console.log(this)
     if (typeof element === 'string') {
       const htmlElement = document.createElement('div');
       htmlElement.innerHTML = element;
@@ -38,28 +33,17 @@ export default class Component {
         } else {
           // string
           const container = document.createElement(element.tag)
-          if (element.content) {
-            container.innerHTML = element.content
-          }
-          ['classList', 'attributes',].forEach(item => {
-            if(element[item] && !Array.isArray(element[item])) {
-              element[item] = [element[item]];
-            } else {console.log(element[item])}
+          element.content ? container.innerHTML = element.content : null;
+          ['classList', 'attributes', 'children'].forEach(item => {
+            element[item] && !Array.isArray(element[item]) ? element[item] = [element[item]] : null;
           })
-          if (element.classList) {
-            container.classList.add(...element.classList)
-          }
-          if (element.attributes) {
-            element.attributes.forEach(attributeSpec => {
+          element.classList ? container.classList.add(...element.classList) : null;
+          element.attributes ? element.attributes.forEach(attributeSpec => {
               container.setAttribute(attributeSpec.name, attributeSpec.value)
-            })
-          }
-          if(element.children) {
-            element.children.forEach(item => {
-              const htmlElement = this._vDomElementToHtmlElement(item);
-              container.appendChild(htmlElement);
-            })
-          }
+            }) : null;
+          element.children ? element.children.forEach(item => {
+              container.append(this._vDomElementToHtmlElement(item))
+            }) : null;
           return container;
         }
       }
