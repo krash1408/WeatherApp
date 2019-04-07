@@ -10,7 +10,7 @@ export default class Component {
     if (typeof content === 'string') {
       this.host.innerHTML = content;
     } else {
-      content.map(this._vDomElementToHtmlElement) // [string|HTMLelement] => [HTMLelement]
+      content.map(item => this._vDomElementToHtmlElement(item)) // [string|HTMLelement] => [HTMLelement]
         .forEach(domElement => {
           this.host.appendChild(domElement);
         })
@@ -38,20 +38,28 @@ export default class Component {
         } else {
           // string
           const container = document.createElement(element.tag)
-          element.content ? container.innerHTML = element.content : console.log('Have no inner content.');
-          ['classList', 'attributes', 'children'].forEach(item => {
+          if (element.content) {
+            container.innerHTML = element.content
+          }
+          ['classList', 'attributes',].forEach(item => {
             if(element[item] && !Array.isArray(element[item])) {
               element[item] = [element[item]];
             } else {console.log(element[item])}
           })
-          element.classList ? container.classList.add(...element.classList) : console.log('Have no classes.');
-          element.attributes ? element.attributes.forEach(attributeSpec => {
-            container.setAttribute(attributeSpec.name, attributeSpec.value);
-          }) : console.log('Have no attributes.');
-          if(element.children) {
-            element.children.forEach(container.appendChild(this._vDomElementToHtmlElement))
+          if (element.classList) {
+            container.classList.add(...element.classList)
           }
-
+          if (element.attributes) {
+            element.attributes.forEach(attributeSpec => {
+              container.setAttribute(attributeSpec.name, attributeSpec.value)
+            })
+          }
+          if(element.children) {
+            element.children.forEach(item => {
+              const htmlElement = this._vDomElementToHtmlElement(item);
+              container.appendChild(htmlElement);
+            })
+          }
           return container;
         }
       }

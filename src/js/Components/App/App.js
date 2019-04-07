@@ -30,8 +30,8 @@ export default class App extends Component {
     w1,
     {
       tag: 'div',
-      content: 'Me div!',
-      classList: ['Parent div', ],
+      content: 'I am a parent div!',
+      classList: ['parent', ],
       attributes: [
         {
         name: 'title',
