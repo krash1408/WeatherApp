@@ -50,6 +50,15 @@ export default class App extends Component {
         },
       ],
     },
+    {
+      tag: 'input',
+      eventHandler: [
+        {
+          type: 'change',
+          //handler:    hint: constructor(method){this.method = this.method.bind(this)}
+        },
+      ],
+    },
   ];
   }
 }
