@@ -28,6 +28,28 @@ export default class App extends Component {
     },
     t1,
     w1,
+    {
+      tag: 'div',
+      content: 'Me div!',
+      classList: ['Parent div', ],
+      attributes: [
+        {
+        name: 'title',
+        value: 'Wow! Works!',
+        },
+      ],
+      children: [
+        {tag: 'div', content: 'First'},
+        {
+          tag: 'div',
+          content: "Second",
+          children: [
+            {tag: 'div', content: 'First of First'},
+            {tag: 'div', content: 'Second of First'},
+          ],
+        },
+      ],
+    },
   ];
   }
 }
