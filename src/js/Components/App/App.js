@@ -1,6 +1,7 @@
 import Component from '../../framework/Component';
 import {Temperature} from '../Temperature';
 import Wind from '../Wind/Wind';
+import WeatherForecast from '../WeaterForecast/WeatherForecast';
 export default class App extends Component {
   constructor (host) {
     super(host);
@@ -10,7 +11,6 @@ export default class App extends Component {
     new Temperature(t1, {temp: 7, unit: 'C'});
     const w1 = document.createElement('div');
     new Wind(w1, {speed: 20, unit: 'km/h'});
-
     return ['temperature:', 
     {
       tag: Temperature,
@@ -45,9 +45,9 @@ export default class App extends Component {
           content: "Second",
           children: [
             {tag: 'div', content: 'First of First'},
-            {tag: 'div', content: 'Second of First'},
           ],
         },
+        '123'
       ],
     },
     {
@@ -55,10 +55,13 @@ export default class App extends Component {
       eventHandler: [
         {
           type: 'change',
-          //handler:    hint: constructor(method){this.method = this.method.bind(this)}
+          //handler:  hint: constructor(method){this.method = this.method.bind(this)}
         },
       ],
     },
+    {
+      tag: WeatherForecast,
+    }
   ];
   }
 }
