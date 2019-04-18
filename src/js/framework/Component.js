@@ -9,10 +9,9 @@ export default class Component {
     this.host.innerHTML = '';
     let content = this.render();
     !Array.isArray(content) ? content = [content] : null;
-    content.map(item => this._vDomElementToHtmlElement(item)) // item can be a string, function or object
-      .forEach(domElement => {
-        this.host.appendChild(domElement)
-      });
+    content
+      .map(item => this._vDomElementToHtmlElement(item)) // item can be a string, function or object
+      .forEach(domElement => this.host.appendChild(domElement));
   }
   // virtual dom
   
@@ -43,12 +42,8 @@ export default class Component {
             e[item] && !Array.isArray(e[item]) ? e[item] = [e[item]] : null;
           })
           e.classList ? element.classList.add(...e.classList) : null;
-          e.attributes ? e.attributes.forEach(attribute => {
-              element.setAttribute(attribute.name, attribute.value)
-            }) : null;
-          e.children ? e.children.forEach(item => {
-              element.append(this._vDomElementToHtmlElement(item))
-            }) : null;
+          e.attributes ? e.attributes.forEach(attribute => element.setAttribute(attribute.name, attribute.value)) : null;
+          e.children ? e.children.forEach(item => element.append(this._vDomElementToHtmlElement(item))) : null;
           return element;
         }
       }

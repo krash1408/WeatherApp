@@ -52,9 +52,24 @@ export default class App extends Component {
     },
     {
       tag: 'input',
+      attributes: [
+        {
+          name: 'type',
+          value: 'button',
+        },
+        // need to create a method, that will be parse a handlers and attached it to tag on render
+        // {
+        //   name: 'onClick',
+        //   value: function(){
+        //     this.render()
+        //     const t12 = document.createElement('div');
+        //     t12 =  new Temperature(t12, {temp: 700000, unit: 'C'})
+        //   }
+        // }
+      ],
       eventHandler: [
         {
-          type: 'change',
+          type: 'onClick',
           //handler:  hint: constructor(method){this.method = this.method.bind(this)}
         },
       ],
